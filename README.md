@@ -1,4 +1,2 @@
-主にコンピュータビジョンのプログラム
-機械学習や深層学習のプログラムを含む
-
-internのディレクトリには，インターンやアルバイトで扱ったプログラムを置く．
+Machine Learning 
+mainly Computer Vision
