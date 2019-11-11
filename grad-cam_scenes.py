@@ -7,14 +7,14 @@ from keras.models import load_model
 
 from tensorflow.python.keras.models import load_model
 
-model = load_model('fine_scenes_model.h5')#学習済みモデルの読み込み
+model = load_model('')#学習済みモデルの読み込み 
 model.summary()
 
 # モデルの最終出力を取り出す
 model_output = model.output[:, 0]
 
 # 最後の畳込み層を取り出す
-last_conv = model.get_layer('block5_conv3')
+last_conv = model.get_layer('')
 
 from tensorflow.python.keras import backend as K 
 
@@ -28,16 +28,14 @@ iterate = K.function([model.input],
 from tensorflow.python.keras.preprocessing import image
 import numpy as np
 
-img_path = './living_room/living_room_0019.jpg' #予測する画像
+img_path = './.jpg' #予測する画像
 img_keras = image.load_img(img_path, target_size=(224, 224))
 img_tensor = image.img_to_array(img_keras)
 img_tensor = np.expand_dims(img_tensor, axis=0)
 predicts = model.predict(img_tensor, batch_size=16, verbose=1, steps=None)
 scenes_num = np.argmax(predicts)
-scenes = ["bathroom", "bedroom", "book_shelf", "classroom", "dining_room", "dish_shelf", "entrance"
-         , "gameroom", "gym", "japanese_room", "kids_room", "kitchen", "library", "living_room"
-         , "meeting_room", "restaurant", "shoes_box", "steps", "toilet", "working_desk"]
-print("The prediction is {}".format(scenes[scenes_num]) )#予測結果の出力
+scenes_class = [] #class名を入れる
+print("The prediction is {}".format(scenes_class[scenes_num]) )#予測結果の出力
 
 # モデルの訓練時と同じ方法で前処理
 img_tensor /= 255.
